@@ -10,6 +10,7 @@ public class Application {
     private static final String URL = "http://94.198.50.185:7081/api/users";
     private static RestTemplate restTemplate = new RestTemplate();
     private static StringBuilder finalString = new StringBuilder();
+    private static User user = new User();
 
     public static void main(String[] args) {
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -20,7 +21,6 @@ public class Application {
 
         httpHeaders.set("cookie", String.join(";", Objects.requireNonNull(responseEntity.getHeaders().get("set-cookie"))));
 
-        User user = new User();
         user.setId(3L);
         user.setName("James");
         user.setLastName("Brown");
@@ -54,7 +54,7 @@ public class Application {
     }
 
     public static void deleteUser(HttpEntity<User> userHttpEntity) {
-        ResponseEntity<String> responseEntity = restTemplate.exchange(URL + "/3", HttpMethod.DELETE, userHttpEntity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(URL + "/" + user.getId(), HttpMethod.DELETE, userHttpEntity, String.class);
         finalString.append(responseEntity.getBody());
     }
 }
