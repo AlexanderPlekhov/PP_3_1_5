@@ -18,7 +18,7 @@ public class Application {
 
         ResponseEntity<List> responseEntity = getAll(objectHttpEntity);
 
-        httpHeaders.set("Cookie", String.join(";", Objects.requireNonNull(responseEntity.getHeaders().get("set-cookie"))));
+        httpHeaders.set("cookie", String.join(";", Objects.requireNonNull(responseEntity.getHeaders().get("set-cookie"))));
 
         User user = new User();
         user.setId(3L);
